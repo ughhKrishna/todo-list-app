@@ -3,7 +3,7 @@ import { useState } from "react";
 export function Input({ onAddItems }) {
   let newItems;
   const [description, setDescription] = useState("");
-  const [intensity, setIntensity] = useState(0);
+  const [intensity, setIntensity] = useState(1);
 
   function handleSubmit() {
     if (!description && !intensity) return;
