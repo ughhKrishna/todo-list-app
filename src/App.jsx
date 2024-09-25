@@ -1,13 +1,20 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "./components/Header";
 import { Input } from "./components/Input";
 import { TaskList } from "./components/TaskList";
 
 function App() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(function () {
+    const storedValue = localStorage.getItem("items");
+    return storedValue ? JSON.parse(storedValue) : [];
+  });
 
   const [editItem, setEditItem] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
 
   function onAddItems(newItem) {
     setItems((i) => [...i, newItem]);
